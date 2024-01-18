@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("appstore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2a27f27cbb1cac27a0aee91c90b8efa58aa5540")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1cbe78bc38ad28bb718f7f98e3621e5073be9309")]
 [assembly: System.Reflection.AssemblyProductAttribute("appstore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("appstore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
