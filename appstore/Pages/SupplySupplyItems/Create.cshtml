@@ -1,0 +1,39 @@
+@page
+@model appstore.Pages.SupplySupplyItems.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SupplySupplyItem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SupplySupplyItem.SupplyItemsId" class="control-label"></label>
+                <input asp-for="SupplySupplyItem.SupplyItemsId" class="form-control" />
+                <span asp-validation-for="SupplySupplyItem.SupplyItemsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplySupplyItem.SupplyId" class="control-label"></label>
+                <select asp-for="SupplySupplyItem.SupplyId" class ="form-control" asp-items="ViewBag.SupplyId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplySupplyItem.SupplyItemId" class="control-label"></label>
+                <select asp-for="SupplySupplyItem.SupplyItemId" class ="form-control" asp-items="ViewBag.SupplyItemId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
