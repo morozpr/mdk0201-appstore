@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using appstore.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace appstore.Data;
 
-public partial class StoredbContext : DbContext
+public partial class StoredbContext : IdentityDbContext
 {
     public StoredbContext()
     {
@@ -44,10 +45,11 @@ public partial class StoredbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=storedb;Username=postgres;Password=postgres");
+        => optionsBuilder.UseNpgsql("Host=localhost:5432;Database=storedb;Username=postgres;Password=postgres");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<Client>(entity =>
         {
             entity.HasKey(e => e.ClientId).HasName("Client_pkey");
@@ -64,6 +66,8 @@ public partial class StoredbContext : DbContext
             entity.HasKey(e => e.EmployeeId).HasName("Employee_pkey");
 
             entity.ToTable("Employee");
+
+            entity.HasIndex(e => e.EmployeeTypeId, "IX_Employee_EmployeeTypeID");
 
             entity.Property(e => e.EmployeeId)
                 .UseIdentityAlwaysColumn()
@@ -83,7 +87,7 @@ public partial class StoredbContext : DbContext
             entity.ToTable("EmployeeType");
 
             entity.Property(e => e.EmployeeTypeId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("EmployeeTypeID");
         });
 
@@ -93,8 +97,10 @@ public partial class StoredbContext : DbContext
 
             entity.ToTable("Item");
 
+            entity.HasIndex(e => e.PriceId, "IX_Item_PriceID");
+
             entity.Property(e => e.ItemId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("ItemID");
             entity.Property(e => e.PriceId).HasColumnName("PriceID");
             entity.Property(e => e.StockId).HasColumnName("StockID");
@@ -112,7 +118,7 @@ public partial class StoredbContext : DbContext
             entity.ToTable("ItemType");
 
             entity.Property(e => e.ItemTypeId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("ItemTypeID");
         });
 
@@ -121,6 +127,12 @@ public partial class StoredbContext : DbContext
             entity.HasKey(e => e.OrderId).HasName("Order_pkey");
 
             entity.ToTable("Order");
+
+            entity.HasIndex(e => e.ClientId, "IX_Order_ClientID");
+
+            entity.HasIndex(e => e.EmployeeId, "IX_Order_EmployeeID");
+
+            entity.HasIndex(e => e.OrderItemsId, "IX_Order_OrderItemsID");
 
             entity.Property(e => e.OrderId)
                 .UseIdentityAlwaysColumn()
@@ -150,8 +162,10 @@ public partial class StoredbContext : DbContext
         {
             entity.HasKey(e => e.OrderItemsId).HasName("OrderItems_pkey");
 
+            entity.HasIndex(e => e.ItemId, "IX_OrderItems_ItemID");
+
             entity.Property(e => e.OrderItemsId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("OrderItemsID");
             entity.Property(e => e.ItemId).HasColumnName("ItemID");
 
@@ -168,7 +182,7 @@ public partial class StoredbContext : DbContext
             entity.ToTable("Price");
 
             entity.Property(e => e.PriceId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("PriceID");
             entity.Property(e => e.DataSet).HasColumnType("timestamp without time zone");
             entity.Property(e => e.DataUnSet).HasColumnType("timestamp without time zone");
@@ -181,7 +195,7 @@ public partial class StoredbContext : DbContext
             entity.ToTable("Provider");
 
             entity.Property(e => e.ProviderId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("ProviderID");
         });
 
@@ -191,8 +205,10 @@ public partial class StoredbContext : DbContext
 
             entity.ToTable("Stock");
 
+            entity.HasIndex(e => e.ItemTypeId, "IX_Stock_ItemTypeID");
+
             entity.Property(e => e.StockId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("StockID");
             entity.Property(e => e.ItemTypeId).HasColumnName("ItemTypeID");
             entity.Property(e => e.SupplyItemsId).HasColumnName("SupplyItemsID");
@@ -209,8 +225,10 @@ public partial class StoredbContext : DbContext
 
             entity.ToTable("Supply");
 
+            entity.HasIndex(e => e.ProviderId, "IX_Supply_ProviderID");
+
             entity.Property(e => e.SupplyId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("SupplyID");
             entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
             entity.Property(e => e.Timestamp).HasColumnType("timestamp without time zone");
@@ -228,7 +246,7 @@ public partial class StoredbContext : DbContext
             entity.ToTable("SupplyItem");
 
             entity.Property(e => e.SupplyItemId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("SupplyItemID");
         });
 
@@ -238,8 +256,12 @@ public partial class StoredbContext : DbContext
 
             entity.ToTable("SupplySupplyItem");
 
+            entity.HasIndex(e => e.SupplyId, "IX_SupplySupplyItem_SupplyID");
+
+            entity.HasIndex(e => e.SupplyItemId, "IX_SupplySupplyItem_SupplyItemID");
+
             entity.Property(e => e.SupplyItemsId)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("SupplyItemsID");
             entity.Property(e => e.SupplyId).HasColumnName("SupplyID");
             entity.Property(e => e.SupplyItemId).HasColumnName("SupplyItemID");
@@ -256,6 +278,7 @@ public partial class StoredbContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

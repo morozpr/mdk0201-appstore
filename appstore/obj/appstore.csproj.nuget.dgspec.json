@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\RiderProjects\\appstore\\appstore\\appstore.csproj": {}
+    "C:\\Users\\mihsa\\OneDrive\\Desktop\\appstore\\appstore\\appstore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\RiderProjects\\appstore\\appstore\\appstore.csproj": {
+    "C:\\Users\\mihsa\\OneDrive\\Desktop\\appstore\\appstore\\appstore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\RiderProjects\\appstore\\appstore\\appstore.csproj",
+        "projectUniqueName": "C:\\Users\\mihsa\\OneDrive\\Desktop\\appstore\\appstore\\appstore.csproj",
         "projectName": "appstore",
-        "projectPath": "C:\\Users\\Admin\\RiderProjects\\appstore\\appstore\\appstore.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\RiderProjects\\appstore\\appstore\\obj\\",
+        "projectPath": "C:\\Users\\mihsa\\OneDrive\\Desktop\\appstore\\appstore\\appstore.csproj",
+        "packagesPath": "C:\\Users\\mihsa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mihsa\\OneDrive\\Desktop\\appstore\\appstore\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\mihsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +40,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.1, )"
